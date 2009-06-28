@@ -1,0 +1,34 @@
+<p>
+  <b>User:</b>
+</p>
+
+<p>
+  <b>Nike name:</b>
+  <%=h @udetail.nike_name %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%=image_tag url_for_file_column('udetail','image') %>
+</p>
+
+<p>
+  <b>About me:</b>
+  <%=h @udetail.about_me %>
+</p>
+
+<p>
+  <b>Art amount:</b>
+  <%=h @udetail.art_amount %>
+</p>
+
+<p>
+  <b>Login amount:</b>
+  <%=h @udetail.login_amount %>
+</p>
+
+<% if @udetail.user == current_user %>
+	<%= link_to 'Edit', edit_user_udetail_path(@udetail) %> |
+<% end %>
+
+<%= link_to '返回', user_path(@udetail.user) %>

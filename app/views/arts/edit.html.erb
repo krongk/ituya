@@ -1,0 +1,23 @@
+<h1>Editing art</h1>
+
+<% form_for(@art,:html=>{:multipart=>'true'}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :subject %><br />
+    <%= f.select :subject_id, @user.subjects.all.collect {|c| [c.name,c.id]} %>
+  </p>
+  <p>
+    <%= f.label :image %><br />
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label :describe %><br />
+    <%= f.text_area :describe %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @art %> |
+<%= link_to 'Back', arts_path %>

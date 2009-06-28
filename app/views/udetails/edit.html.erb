@@ -1,0 +1,23 @@
+<%if flash[:notice] %><div class="note"><%=flash[:notice]%></div><% end -%>
+<br/>
+<h2>补充详细信息</h2>
+<div class="important">
+<% form_for([@user,@udetail], :html=>{:multipart=>true}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :nike_name ,"昵称"%><br />
+    <%= f.text_field :nike_name %>
+  </p>
+  <p>
+    <%= f.label :image,"头像" %><br />
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label :about_me,"关于我..." %><br />
+    <%= f.text_area :about_me,:rows=>6,:cols=>45 %>
+  </p>
+  <p>
+    <%= f.submit '更 新' %>
+  </p>
+<% end %>
+</div>

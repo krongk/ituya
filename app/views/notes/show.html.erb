@@ -1,0 +1,23 @@
+<p>
+  <b>User:</b>
+  <%=h @note.user %>
+</p>
+
+<p>
+  <b>From user:</b>
+  <%=h @note.from_user_id %>
+</p>
+
+<p>
+  <b>From user mail:</b>
+  <%=h @note.from_user_mail %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @note.message %>
+</p>
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>

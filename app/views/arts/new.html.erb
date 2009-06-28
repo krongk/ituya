@@ -1,0 +1,25 @@
+<br/><br/>
+<div class="important">
+<h2>添加新作品</h2>
+<hr/>
+<% form_for(@art,:html=>{:multipart=>'true'}) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :subject,'所在专辑' %><br />
+    <%= f.select :subject_id, @user.subjects.all.collect {|c| [c.name,c.id]} %>
+		&nbsp;<%= link_to '添加新专辑', new_subject_path %>
+  </p>
+  <p>
+    <%= f.label :image,'选择作品' %><br />
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label :describe,'作品描述' %><br />
+    <%= f.text_area :describe,:rows=>10,:cols=>60 %>
+  </p>
+  <p>
+    <%= f.submit '提交' %>
+  </p>
+<% end %>
+</div>
+<%= link_to '返回', arts_path %>

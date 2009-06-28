@@ -1,0 +1,8 @@
+<% for @user in @users do %>
+<% @udetail = @user.udetail %>
+ <div class="user_list" style="float:left;width:80px;border:1px;background-color:white;
+ margin:4px;">
+	<%= image_tag url_for_file_column('udetail','image') %><br/>
+	<%= link_to @user.login,user_path(@user) %> 
+ </div>
+<%end%>

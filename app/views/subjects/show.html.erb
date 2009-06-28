@@ -1,0 +1,28 @@
+<% if flash[:notice] %><div class="note"><%=flash[:notice]%></div><% end %>
+<br/><br/>
+<div class="important">
+<h4 class="secondTitle"><%= @subject.name %></h4>
+<%= link_to '编辑', edit_subject_path(@subject) %> |
+<%= link_to '返回', subjects_path %> |
+<%= link_to '添加作品', new_subject_art_path(@subject)%>
+<% for @art in @subject.arts.all(:order => 'updated_at DESC') do %>
+	<div id="main">
+	<!-- begin: #col1 - first float column -->
+	<div id="col1">
+		<A id="content" name="content"></A>
+		<!-- skiplink anchor: Content -->
+		<%= image_tag url_for_file_column("art","image","thumb") %>
+	<!-- end: #col1 -->
+	</div>
+	<!-- begin: #col3 static column -->
+	 <div id="col3">
+			 <div id="col3_content" class="clearfix">
+					<%= @art.describe %>
+			 </div>
+			 <div id="ie_clearing">&nbsp;</div>
+			<!-- End: IE Column Clearing -->
+		</div>
+	<!-- end: #col3 -->
+	<hr/>
+<% end %>
+</div>

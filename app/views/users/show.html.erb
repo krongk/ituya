@@ -1,0 +1,61 @@
+<div id="main">
+<!-- begin: #col1 - first float column -->
+<div id="col1">
+	<A id="content" name="content"></A>
+	<!-- skiplink anchor: Content -->
+	<div id="arts">
+	 	<H4 class="secondTitle">
+		涂鸦板...
+		</H4>
+		<!--专辑列表-->
+		专辑:
+		<% for subject in @user.subjects do %>
+			<a href="/subjects/<%=subject.id%>"><%=subject.name%></a> &nbsp;&nbsp;
+		<% end %>
+		<hr/>
+		<!--最新5张图片-->
+		<% for @art in Art.find(:all,:conditions=>["user_id=?", @user.id], :order=>"updated_at DESC",
+		:limit=>5)%>
+			<%=image_tag url_for_file_column("art","image","thumb")%><br/>
+			<span style="color:green">评论:</span><%= @art.describe %>
+			<hr/>
+		<% end %>
+	</div>
+
+<!-- end: #col1 -->
+</div>
+
+<!-- begin: #col3 static column -->
+ <div id="col3">
+        <div id="col3_content" class="clearfix">
+					<!--所有者信息-->
+          <div class="vcard">
+					  <%= image_tag url_for_file_column("udetail","image") || "/images/u.png" %>
+						<p><%= @user.udetail.nike_name || @user.login %>
+						<% if @user == current_user %>
+						 [<%=link_to '编辑',edit_user_udetail_path(@user)%>]
+						<% end %>
+						</p>
+						<p>关于我...<br/>
+						<%= @user.udetail.about_me %></p> 
+          </div> 
+       <!--follow列表-->
+			
+			 <% if logged_in? and @user != current_user and !followed?(@user,current_user)%>
+				 <div id="follow_me"><%=link_to_remote "<img src='/images/ban_follow.png'/>",
+							:url=>{:controller=>'follows',:action=>'create',:user_id=>@user.id}%>
+				 </div>
+			 <% end %>
+			 <div class="vevent">
+			 <% @follows =Follow.find(:all,:conditions=>["user_id=?", @user.id],:order=>"updated_at DESC") %>
+			 <% @follows.each do |follow| %>
+					<% @u=User.find(follow.the_followed_id) %>
+					<% @ud = @u.udetail %>
+				  <%= link_to image_tag(url_for_file_column("ud","image")), @u %>
+			 <% end %>
+			 </div>
+     </div>
+     <div id="ie_clearing">&nbsp;</div>
+    <!-- End: IE Column Clearing -->
+  </div>
+<!-- end: #col3 -->

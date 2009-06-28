@@ -1,0 +1,16 @@
+<% if flash[:notice] %><div class="note"><%=flash[:notice]%></div><% end %>
+<br/><br/>
+<div class="important">
+<h2>添加新专辑</h2><hr/>
+	<% form_for(@subject) do |f| %>
+		<%= f.error_messages %>
+		<p>
+			<%= f.label :name,'专辑名' %><br />
+			<%= f.text_field :name %>
+		</p>
+		<p>
+			<%= f.submit '添加' %>
+		</p>
+	<% end %>
+</div>
+<%= link_to '返回', new_art_path %>

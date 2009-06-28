@@ -1,0 +1,31 @@
+<% @udetail =user.udetail %> 
+<div id="col3">
+        <div id="col3_content" class="clearfix">
+					<%= will_paginate arts,:prev_label=>"<img src='/images/ban_prev.png'/>",:next_label=>"<img src='/images/ban_next.png'/>",:page_links=>false %>
+					
+					<!--所有者信息-->
+          <div class="vcard">
+						<%= image_tag url_for_file_column("udetail","image") %>
+						<p><%=link_to user.login, user %></a> 
+						</p>
+						<p>关于我...<br/>
+						<%= @udetail.about_me %></p> 
+          </div> 
+
+       <!--涂鸦列表-->
+			 
+			 <div id="follow_me"><%=link_to_remote image_tag("ban_follow.png"),
+						:url=>{:controller=>'follows',:action=>'create',:user_id=>user.id}%>
+			 </div>
+			 <div class="vevent">
+			 <% @follows =Follow.find(:all,:conditions=>["user_id=?",user.id],:order=>"updated_at DESC") %>
+			 <% @follows.each do |follow| %>
+					<% @u=User.find(follow.the_followed_id) %>
+					<% @ud = @u.udetail %>
+				  <%= link_to image_tag(url_for_file_column("ud","image")), @u %>
+			 <% end %>
+			 </div>
+     </div>
+     <div id="ie_clearing">&nbsp;</div>
+    <!-- End: IE Column Clearing -->
+</div>

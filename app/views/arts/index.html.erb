@@ -1,0 +1,30 @@
+
+<div id="main">
+<!-- begin: #col1 - first float column -->
+<div id="col1">
+<% for @art in @arts do %>
+	<A id="content" name="content"></A>
+	<!-- skiplink anchor: Content -->
+	<P>
+	<%= image_tag url_for_file_column('art' ,'image','thumb') %>
+	</P>
+	<H4 class="secondTitle">
+	作品描述...
+	</H4>
+	<P>
+  <%=h @art.describe %>
+	</P>
+	<p>
+	<%= link_to '查看评论', @art %>
+	<% if logged_in? and current_user.login=='admin'%>
+		| <%= link_to '编辑', edit_art_path(@art) %>
+		| <%= link_to '删除', @art, :confirm => '确定要删除么?', :method => :delete %>
+	<% end %>
+	</p>
+<% end %>
+<!-- end: #col1 -->
+</div>
+
+<!-- begin: #col3 static column -->
+ <%= render :partial => 'layouts/col3', :locals=>{:user =>@art.subject.user,:arts=>@arts} %>
+<!-- end: #col3 -->

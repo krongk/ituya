@@ -1,0 +1,49 @@
+<br/><br/>
+<%= image_tag url_for_file_column('art' ,'image','medium') %>
+<br/><br/>
+<table>
+<tr><td>
+<%= link_to @user.login, @user %>上传于<%= @art.updated_at %> 
+&nbsp;[<%= link_to '修改',edit_art_path(@art)%>]
+</td></tr>
+<tr><td>
+<%=h @art.describe %>
+</td></tr>
+</table>
+
+<% if logged_in? and current_user.login=='admin' %>
+	<%= link_to '编辑', edit_art_path(@art) %> |
+<% end %>
+
+<hr/>
+<% if @art.comments.empty? %>
+ 评论为空
+<% else %>
+	<H4 class="secondTitle">评论列表</h4>
+	<div id="comment_list">
+		<% @art.comments.each do |comment| %>
+			<% if comment.user_id !=nil %>
+				<% @udetail_a =Udetail.find_by_user_id(comment.user_id) %>
+				<div id="comment_item">
+					<% if @udetail_a.image %>
+						<%=image_tag url_for_file_column('udetail_a','image')%>
+					<% end %>
+					<%=comment.message %>
+				</div>
+			<% elsif comment.nil? %>
+				<div id="comment_item">
+					<%= comment.user_mail%>:
+					<%=comment.message %>
+				</div>
+			<% end %>
+			<% if logged_in? and current_user.login=='admin' %>
+				<%=link_to '删除',[ @art,comment ],:confirm=>"确定要删除么?",:method=>:delete %>
+			<% end %>
+			<hr/>
+		<% end %>
+	</div>
+<% end %>
+
+<div class="important">
+<%= render :partial => 'comments/form'%>
+</div>

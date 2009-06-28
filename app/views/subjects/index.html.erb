@@ -1,0 +1,17 @@
+<% @subjects.each do |subject| %>
+<hr/>
+	 <div>
+		 <% if subject.user != nil %>
+			<%= link_to subject.user.login,user_path(subject.user)%>
+			<% if subject.name != 'default' %>的专辑:
+			<%= link_to subject.name,subject_path(subject)%>
+			<% end %>
+		 <% end %>
+	 </div>
+
+		<% for @art in subject.arts.all(:order => 'updated_at DESC') do %>
+			<%=link_to image_tag(url_for_file_column("art","image","small")),art_path(@art)%>
+		<% end %>
+		 <hr/>
+<% end %>
+<br />

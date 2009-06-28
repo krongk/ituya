@@ -1,0 +1,20 @@
+<% form_for([@art,@comment]) do |f| %>
+  <%= f.error_messages %>
+
+	<% if logged_in? %>
+			<%= current_user.login %>
+			<%= f.hidden_field :user_id , :value=>current_user.id%>
+	<% else %>
+		<p>
+			你的邮箱地址:<br/>
+			<%= f.text_field :user_mail %>
+		</p>
+	<% end %>
+	<p>
+			评论内容...<br />
+			<%= f.text_area :message, :cols=>50, :rows=>6 %>
+	</p>
+  <p>
+    <%= f.submit '添加评论' %>
+  </p>
+<% end %>

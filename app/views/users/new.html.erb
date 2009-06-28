@@ -1,0 +1,23 @@
+<br/><br/>
+<%= error_messages_for :user %>
+<div class="note">
+<h2>用户注册</h2>
+	<% form_for :user, :url => users_path do |f| -%>
+
+	<p><label for="login">登录名</label><br/>
+	<%= f.text_field :login %></p>
+
+	<p><label for="email">电子邮件</label><br/>
+	<%= f.text_field :email %></p>
+
+	<p><label for="password">密码</label><br/>
+	<%= f.password_field :password %></p>
+
+	<p><label for="password_confirmation">密码确认</label><br/>
+	<%= f.password_field :password_confirmation %></p>
+
+	<p><%= submit_tag '注册' %>
+	 &nbsp;或 &nbsp; <%= link_to "登录","/login" %>
+	</p>
+	<% end -%>
+</div>

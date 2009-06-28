@@ -1,0 +1,22 @@
+<br/>
+<% if flash[:notice] %>
+	<div class="note"><%=flash[:notice]%><%=flash.now[:error]%></div>
+<% end %>
+<p></p>
+<div class="important">
+	<% form_tag session_path do -%>
+	<p><label for="login">登录</label><br/>
+	<%= text_field_tag 'login' %></p>
+
+	<p><label for="password">密码</label><br/>
+	<%= password_field_tag 'password' %></p>
+
+	<!-- Uncomment this if you want this functionality
+	<p><label for="remember_me">Remember me:</label>
+	<%= check_box_tag 'remember_me' %></p>
+	-->
+
+	<p><%= submit_tag '登录' %></p>
+	<%=link_to "注册","/signup" %>
+	<% end -%>
+</div>

@@ -1,0 +1,41 @@
+<!-- begin: header navigation #header -->
+<div id="header">
+  <div id="topnav">
+    <!-- start: skip link navigation -->
+    <a class="skip" href="#navigation" title="skip link">skip to navigation</a><span class="hideme">.</span>
+    <a class="skip" href="#content" title="skip link">skip to content</a><span class="hideme">.</span>
+    <!-- end: skip link navigation -->
+    <span>
+		<% if logged_in? %>
+			<%=link_to current_user.login,user_path(current_user) %>
+			| <a href="/logout">退出</a>
+		<% else %>
+			<a href="/login">登录</a>
+			| <a href="/signup">注册</a>
+		<% end %>
+		</span> 
+	</div>
+
+</div>
+<!-- end: header navigation -->
+
+<!-- begin: main navigation #nav -->
+<div id="nav">
+	<!-- skiplink anchor: navigation -->
+	
+	<img src="/images/ituya-3.png"/>
+	
+	<div class="hlist">
+		<ul>
+		 <li ><a href="/arts">最新画</a></li>
+		 <li><a href="/subjects">专题展</a></li>
+		 <li><a href="/users">找画友</a></li>
+		 <% if logged_in? %>
+		 <li><%= link_to '我的画',current_user %></li>
+		 <li><a href="/arts/new"><span style="color:red">上传作品</span></a></li>
+		 <li><a href="/logout">退出</a></li>
+		 <% end %>
+		</ul>
+  </div>
+</div>
+<!-- end: main navigation -->
